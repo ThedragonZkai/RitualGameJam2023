@@ -20,8 +20,13 @@ public class PlayerController : MonoBehaviour
 	public LayerMask itemsMask;
 	public float reach;
 	public float forceAmplifier;
+<<<<<<< Updated upstream
 	public TMP_Text healthText;
 	public int health;
+=======
+	private float startingHealth = 100f;
+	private float currentHealth;
+>>>>>>> Stashed changes
 
 
 	private GameObject holdingObj;
@@ -47,6 +52,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
 		flashlight.transform.position = holdingTarget.transform.position;
 		flashlight.transform.rotation = Quaternion.Lerp(cam.transform.rotation, holdingTarget.transform.rotation, lerpSpeed * Time.deltaTime);
 
@@ -55,6 +61,11 @@ public class PlayerController : MonoBehaviour
 		if (health < 0) {
 			SceneManager.LoadScene("");
 		}
+=======
+		
+		flashlight.transform.position = holdingTarget.transform.position;
+		flashlight.transform.rotation = Quaternion.Lerp(cam.transform.rotation, holdingTarget.transform.rotation, lerpSpeed * Time.deltaTime);
+>>>>>>> Stashed changes
 
 		rb.AddRelativeForce(new Vector3(Input.GetAxisRaw("Horizontal")* speed, 0, Input.GetAxisRaw("Vertical") * speed), ForceMode.Impulse);
 		rb.AddForce(new Vector3(rb.velocity.x  * -drag, 0, rb.velocity.z  * -drag), ForceMode.Impulse);
@@ -116,8 +127,15 @@ public class PlayerController : MonoBehaviour
 			lastWorldRot = holdingObj.transform.rotation.eulerAngles;
 		}
 	}
-
-
+	void OnCollisionEnter(Collision collision){
+		if(collision.gameObject.tag == "attack"){
+			Damaging(10f);
+		} 
+	}
+	
+	void Damaging(float Amount){
+		currentHealth -= Amount;
+	}
 
 	void LockCursor(bool doLock) {
 		if (doLock == true) {
