@@ -15,8 +15,8 @@ public class GameController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        
-    }
+		gun.SetActive(false);
+	}
 
     // Update is called once per frame
     void Update()
@@ -25,11 +25,17 @@ public class GameController : MonoBehaviour
 			taskText.text = "Investigate the light";
 		}
         if (stage == 2) {
-			taskText.text = "Bring candles to pentagon (" + candlesCollected + "/" + candlesToCollect + ")";
+			taskText.text = "Bring candles to pentagram (" + candlesCollected + "/" + candlesToCollect + ")";
 		}
 		else if (stage == 3) {
 			taskText.text = "Kill Monday";
 			gun.SetActive(true);
 		}
     }
+
+
+	void OnCollisionStay(Collision other)
+	{
+		Debug.Log("aa");
+	}
 }
