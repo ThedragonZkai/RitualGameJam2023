@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 	private float yValue;
 	private Vector3 lastWorldPos;
 	private Vector3 lastWorldRot;
+	private Animator anim;
 
 
 
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		LockCursor(true);
 		cam = Camera.main.gameObject;
+		anim = GetComponent<Animator>();
 	}
 
     // Update is called once per frame
@@ -57,15 +59,23 @@ public class PlayerController : MonoBehaviour
         {
             yValue = -90;
         }
-
+		if (Input.GetAxisRaw("Horizontal") * speed != 0|| Input.GetAxisRaw("Vertical") * speed != 0) {
+			anim.SetBool("Moving",true);
+		}
+		else {anim.SetBool("Moving",false);}
 
 		if (Input.GetMouseButtonUp(1)) {
-			holdingObj.transform.SetParent(null);
-			holdingObj.GetComponent<Collider>().enabled = true;
-			holdingObj.GetComponent<Rigidbody>().isKinematic = false;
-			holdingObj.GetComponent<Rigidbody>().AddTorque((transform.rotation.eulerAngles - lastWorldRot) * forceAmplifier, ForceMode.Impulse);
-			holdingObj.GetComponent<Rigidbody>().AddForce((transform.position - lastWorldPos) * forceAmplifier, ForceMode.Impulse);
+			if (holdingObj != null)
+			{
 
+
+				holdingObj.transform.SetParent(null);
+				holdingObj.GetComponent<Collider>().enabled = true;
+				holdingObj.GetComponent<Rigidbody>().isKinematic = false;
+				holdingObj.GetComponent<Rigidbody>().AddTorque((holdingObj.transform.rotation.eulerAngles - lastWorldRot) * forceAmplifier, ForceMode.Impulse);
+				holdingObj.GetComponent<Rigidbody>().AddForce((holdingObj.transform.position - lastWorldPos) * forceAmplifier, ForceMode.Impulse);
+				holdingObj = null;
+			}
 		}
 
 
@@ -80,7 +90,7 @@ public class PlayerController : MonoBehaviour
 				hit.collider.transform.SetParent(holdingTarget.transform);
 			}
 			
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+			Debug.DrawRay(transform.position, cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
 			crosshair.GetComponent<RawImage>().texture = crosshairSelected;
 		}
@@ -90,9 +100,11 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Did not Hit");
 			crosshair.GetComponent<RawImage>().texture = crosshairUnselected;
         }
-
-		lastWorldPos = holdingObj.transform.position;
-		lastWorldRot = holdingObj.transform.rotation.eulerAngles;
+		if (holdingObj != null)
+		{
+			lastWorldPos = holdingObj.transform.position;
+			lastWorldRot = holdingObj.transform.rotation.eulerAngles;
+		}
 	}
 
 
