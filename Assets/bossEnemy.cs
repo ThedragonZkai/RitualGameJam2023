@@ -55,7 +55,8 @@ public class bossEnemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             Destroy(this.gameObject);
-        }
+			SendMessageUpwards("BossDead");
+		}
 
 		if (bossBar != null) {
 			bossBar.value = currentHealth;

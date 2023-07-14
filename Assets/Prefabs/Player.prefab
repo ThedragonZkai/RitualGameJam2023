@@ -210,6 +210,8 @@ MonoBehaviour:
     m_Bits: 128
   reach: 1
   forceAmplifier: 5
+  healthText: {fileID: 0}
+  health: 0
 --- !u!54 &2015760894554907772
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5628,7 +5630,11 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
+<<<<<<< Updated upstream
   - {x: 2.9406767, y: 1.9202385, z: 0.28912094}
+=======
+  - {x: -12.370001, y: 1.9997885, z: 1}
+>>>>>>> Stashed changes
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3

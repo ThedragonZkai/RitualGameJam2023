@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -16,9 +17,11 @@ public class GameController : MonoBehaviour
 	public GameObject[] candles;
 	public GameObject player;
 	public GameObject boss;
+	public TMP_Text healthText;
 	// Start is called before the first frame update
 	void Start()
     {
+		healthText.gameObject.SetActive(false);
 		gun.SetActive(false);
 		candlesToCollect = candles.Length;
 	}
@@ -57,13 +60,17 @@ public class GameController : MonoBehaviour
 		if (candlesCollected > candlesToCollect-1) {
 				stage = 3;
 				Instantiate(boss);
+				healthText.gameObject.SetActive(true);
+
 			}
 		}
 		if (stage == 3) {
-			
+		
 		}
 
     }
-
+public void BossDead() {
+		SceneManager.LoadScene("");
+	}
 
 }
