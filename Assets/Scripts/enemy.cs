@@ -9,6 +9,7 @@ public class enemy : MonoBehaviour
     private float currentHealth;
     private float startingHealth = 100f;
 	public Slider bossBar;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -36,4 +37,5 @@ public class enemy : MonoBehaviour
 			bossBar.value = currentHealth;
 		}
     }
+
 }

@@ -54,9 +54,14 @@ public class shooting : MonoBehaviour
         {
             Debug.Log("yo jolie"); 
             enemy enemy = hit.collider.GetComponent<enemy>();
+            bossEnemy enemy2 = hit.collider.GetComponent<bossEnemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(10);
+            }
+            if (enemy2 != null)
+            {
+                enemy2.TakeDamage(10);
             }
 
         //    // if (enemy != null)
