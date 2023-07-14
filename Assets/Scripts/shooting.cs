@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+
 
 public class shooting : MonoBehaviour
 {
@@ -13,10 +15,19 @@ public class shooting : MonoBehaviour
     public ParticleSystem muzzleFlash;
     // AudioSource m_shootingSound;
 
+
+    public float recoilForce = 1f;
+    public float recoilDuration = 0.2f;
+    public float recoverySpeed = 1f;
+
+    private Vector3 originalPosition;
+
     private float lastShotTime = -Mathf.Infinity;
     void Start()
     {
         //m_shootingSound = GetComponent<AudioSource>();
+
+        originalPosition = transform.localPosition;
     }
 
     private void Update()
@@ -59,5 +70,39 @@ public class shooting : MonoBehaviour
           lastShotTime = Time.time;
         }
 
+
+
+
+        Fire();
     }
-}   
+
+
+
+
+  
+
+    public void Fire()
+    {
+        StartCoroutine(Recoil());
+    }
+
+    private IEnumerator Recoil()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < recoilDuration)
+        {
+            transform.localPosition -= Vector3.forward * recoilForce * Time.deltaTime;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        while (transform.localPosition != originalPosition)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, recoverySpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+}
+  
