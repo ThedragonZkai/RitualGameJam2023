@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -52,9 +51,7 @@ public class PlayerController : MonoBehaviour
 
 
 		healthText.text = "Health: " + health.ToString();
-		if (health < 0) {
-			SceneManager.LoadScene("");
-		}
+
 
 		rb.AddRelativeForce(new Vector3(Input.GetAxisRaw("Horizontal")* speed, 0, Input.GetAxisRaw("Vertical") * speed), ForceMode.Impulse);
 		rb.AddForce(new Vector3(rb.velocity.x  * -drag, 0, rb.velocity.z  * -drag), ForceMode.Impulse);
