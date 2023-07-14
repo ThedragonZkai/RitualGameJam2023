@@ -11,6 +11,9 @@ public class shooting : MonoBehaviour
     public LineRenderer Line_Jolie;
     public RaycastHit hit;
     public ParticleSystem muzzleFlash;
+    public Vector3 recoil;
+    public float maxRecoil;
+    public float recoilSpeed;
     // AudioSource m_shootingSound;
 
     private float lastShotTime = -Mathf.Infinity;
@@ -30,6 +33,7 @@ public class shooting : MonoBehaviour
             lastShotTime = Time.time;
 
         }
+        
         Line_Jolie.SetPosition(0, bulletSpawnPoint.position);
         Line_Jolie.SetPosition(1, hit.point);
     }
