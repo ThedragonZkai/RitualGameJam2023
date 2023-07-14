@@ -201,8 +201,10 @@ MonoBehaviour:
   drag: 0.05
   xSensitivity: 1
   ySensitivity: 1
+  flashlight: {fileID: 0}
   holdingTarget: {fileID: 2015760894982926285}
   lerpSpeed: 15
+  crosshair: {fileID: 0}
   crosshairUnselected: {fileID: 2800000, guid: 5493da9cf4eaa0544a970868d6ba29de, type: 3}
   crosshairSelected: {fileID: 2800000, guid: 0d5789eecf8718e47be06f38d71e8c03, type: 3}
   itemsMask:
@@ -5628,7 +5630,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 2.9406767, y: 1.9202385, z: 0.28912094}
+  - {x: -4.689146, y: 1.9999988, z: 1.9178219}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3

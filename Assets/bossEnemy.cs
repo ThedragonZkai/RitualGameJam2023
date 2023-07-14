@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class bossEnemy : MonoBehaviour
@@ -54,7 +55,8 @@ public class bossEnemy : MonoBehaviour
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
-            Destroy(this.gameObject);
+			SceneManager.LoadScene("WinScreen");
+			Destroy(this.gameObject);
         }
 
 		if (bossBar != null) {
