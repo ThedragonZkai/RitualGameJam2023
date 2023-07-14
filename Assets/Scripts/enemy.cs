@@ -12,11 +12,13 @@ public class enemy : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        currentHealth = startingHealth;
+		bossBar = GameObject.Find("BossBar").GetComponent<Slider>();
+		currentHealth = startingHealth;
 		if (bossBar != null) {
 			bossBar.maxValue = startingHealth;
 		}
-    }
+		bossBar.gameObject.SetActive(true);
+	}
 
     // Update is called once per frame
     void Update()
