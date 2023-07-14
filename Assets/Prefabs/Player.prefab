@@ -5630,7 +5630,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 2.4457016, y: 1.9295295, z: -11.927298}
+  - {x: -5.326622, y: 1.9903939, z: -2.612135}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -5708,6 +5708,9 @@ MonoBehaviour:
     m_Bits: 8
   Line_Jolie: {fileID: 2568434720720777617}
   muzzleFlash: {fileID: 2568434720077854726}
+  recoilForce: 1
+  recoilDuration: 0.2
+  recoverySpeed: 1
 --- !u!1 &3914650467472859639
 GameObject:
   m_ObjectHideFlags: 0

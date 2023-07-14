@@ -12,10 +12,15 @@ public class GameController : MonoBehaviour
 	public int candlesCollected;
 	public int candlesToCollect;
 	public GameObject gun;
+	public float distanceToCheck;
+	public GameObject[] candles;
+	public GameObject player;
+	public GameObject boss;
 	// Start is called before the first frame update
 	void Start()
     {
 		gun.SetActive(false);
+		candlesToCollect = candles.Length;
 	}
 
     // Update is called once per frame
@@ -31,11 +36,34 @@ public class GameController : MonoBehaviour
 			taskText.text = "Kill Monday";
 			gun.SetActive(true);
 		}
+
+
+
+
+		if (stage == 1) {
+			if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) < distanceToCheck) {
+				stage = 2;
+			}
+		}
+		if (stage == 2) {
+			candlesCollected=0;
+		for (int i = 0; i < candles.Length; i++)
+		{
+			if (Vector3.Distance(this.gameObject.transform.position, candles[i].transform.position) < distanceToCheck)
+			{
+				candlesCollected++;
+			}
+		}
+		if (candlesCollected > candlesToCollect-1) {
+				stage = 3;
+				Instantiate(boss);
+			}
+		}
+		if (stage == 3) {
+			
+		}
+
     }
 
 
-	void OnCollisionStay(Collision other)
-	{
-		Debug.Log("aa");
-	}
 }
