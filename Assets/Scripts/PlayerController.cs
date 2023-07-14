@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
 	public Texture crosshairSelected;
 	public LayerMask itemsMask;
 	public float reach;
+	public float forceAmplifier;
 
 
 	private GameObject holdingObj;
 	private Rigidbody rb;
 	private GameObject cam;
 	private float yValue;
+	private Vector3 lastWorldPos;
+	private Vector3 lastWorldRot;
 
 
 
@@ -56,10 +59,12 @@ public class PlayerController : MonoBehaviour
         }
 
 
-		if (Input.GetMouseButtonUp(0)) {
+		if (Input.GetMouseButtonUp(1)) {
 			holdingObj.transform.SetParent(null);
 			holdingObj.GetComponent<Collider>().enabled = true;
 			holdingObj.GetComponent<Rigidbody>().isKinematic = false;
+			holdingObj.GetComponent<Rigidbody>().AddTorque((transform.rotation.eulerAngles - lastWorldRot) * forceAmplifier, ForceMode.Impulse);
+			holdingObj.GetComponent<Rigidbody>().AddForce((transform.position - lastWorldPos) * forceAmplifier, ForceMode.Impulse);
 
 		}
 
@@ -68,7 +73,7 @@ public class PlayerController : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
 		if (Physics.Raycast(ray, out hit, reach, itemsMask))
 		{
-			if (Input.GetMouseButtonDown(0)) {
+			if (Input.GetMouseButtonDown(1)) {
 				holdingObj = hit.collider.gameObject;
 				holdingObj.GetComponent<Collider>().enabled = false;
 				holdingObj.GetComponent<Rigidbody>().isKinematic = true;
@@ -85,8 +90,9 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Did not Hit");
 			crosshair.GetComponent<RawImage>().texture = crosshairUnselected;
         }
-		
 
+		lastWorldPos = holdingObj.transform.position;
+		lastWorldRot = holdingObj.transform.rotation.eulerAngles;
 	}
 
 
